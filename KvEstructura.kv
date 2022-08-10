@@ -95,19 +95,40 @@
         GridLayout:
             cols:2                
             Button:
-                text: "Líder de Desarrollo / Proyect Manager / SDM"
+                text: "Líder de Desarrollo / ProjectManager / SDM"
                 on_press: 
                     self.background_color = (0/255,51/255,102/255,1)
                 on_release:
                     app.root.current = "perfil1"
                     root.manager.transition.direction = "left"
             Button:
-                text: "Desarrollador de Software"
+                text: "Scrum Master / Agile Coach"
                 on_press: 
                     self.background_color = (0/255,51/255,102/255,1)
                 on_release:
-                    app.root.current = "perfil2"
+                    app.root.current = "perfil1b"
+                    root.manager.transition.direction = "left"                    
+            Button:
+                text: "Desarrollador de Software Back End"
+                on_press: 
+                    self.background_color = (0/255,51/255,102/255,1)
+                on_release:
+                    app.root.current = "perfil2a"
                     root.manager.transition.direction = "left"  
+            Button:
+                text: "Desarrollador de Software Front End"
+                on_press: 
+                    self.background_color = (0/255,51/255,102/255,1)
+                on_release:
+                    app.root.current = "perfil2b"
+                    root.manager.transition.direction = "left"
+            Button:
+                text: "Desarrollador de Software Full Stack"
+                on_press: 
+                    self.background_color = (0/255,51/255,102/255,1)
+                on_release:
+                    app.root.current = "perfil2c"
+                    root.manager.transition.direction = "left"                                        
             Button:
                 text: "Arquitecto de Software"
                 on_press: 
@@ -137,7 +158,7 @@
                     app.root.current = "perfil6"
                     root.manager.transition.direction = "left"        
             Button:
-                text: "Analista UX (usabilidad)"
+                text: "Analista UI/UX (usabilidad)"
                 on_press: 
                     self.background_color = (0/255,51/255,102/255,1)
                 on_release:
@@ -150,6 +171,13 @@
                 on_release:
                     app.root.current = "perfil8"
                     root.manager.transition.direction = "left"    
+            Button:
+                text: "QA Automation"
+                on_press: 
+                    self.background_color = (0/255,51/255,102/255,1)
+                on_release:
+                    app.root.current = "perfil19"
+                    root.manager.transition.direction = "left"                        
             Button:
                 text: "Analista de Calidad"
                 on_press: 
@@ -184,7 +212,14 @@
                     self.background_color = (0/255,51/255,102/255,1)
                 on_release:
                     app.root.current = "perfil13"
-                    root.manager.transition.direction = "left"        
+                    root.manager.transition.direction = "left"  
+            Button:
+                text: "Experto en Machine Learning"
+                on_press: 
+                    self.background_color = (0/255,51/255,102/255,1)
+                on_release:
+                    app.root.current = "perfil21"
+                    root.manager.transition.direction = "left"                           
             Button:
                 text: "Analista Middleware"
                 on_press: 
@@ -219,7 +254,14 @@
                     self.background_color = (0/255,51/255,102/255,1)
                 on_release:
                     app.root.current = "perfil18"
-                    root.manager.transition.direction = "left"                                                                                                                                                                        
+                    root.manager.transition.direction = "left"      
+            Button:
+                text: "DevOps"
+                on_press: 
+                    self.background_color = (0/255,51/255,102/255,1)
+                on_release:
+                    app.root.current = "perfil20"
+                    root.manager.transition.direction = "left" 
 
         Button:
             text: "Cerrar APP y Enviar Respuestas"
@@ -258,10 +300,11 @@
         on_release:    
             root.fin()
 
-<Perfil1>: #Líder de Desarrollo / Proyect Manager (PM)
+<Perfil1>: #Líder de Desarrollo / ProjectManager (PM)
     name: "perfil1"
     pm: pm
     sdm: sdm
+    scr: scr
 
     GridLayout:
         cols:1
@@ -277,7 +320,7 @@
             padding: 15
             
             Label:
-                text: "Líder de Desarrollo / Proyect Manager (PM)"
+                text: "Líder de Desarrollo / ProjectManager (PM)"
                 #color: (0/255 ,0/255, 0/255,1)
                 size_hint: 0.8, 0.2
                 pos_hint: {"x":0.1, "top":1}
@@ -345,6 +388,21 @@
                 multiline: False
                 font_size: (root.width**2 + root.height**2) / 14**4
 
+            Label:
+                text: "Scrum Master / Agile Coach:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.15*3}                
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'
+                
+            TextInput:
+                id: scr
+                pos_hint: {"x":0.8, "top":0.75-0.155*3}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
         Button:
             pos_hint:{"x":0.2,"y":0.05}
             size_hint: 0.6, 0.15
@@ -356,8 +414,98 @@
                 root.manager.transition.direction = "right"            
                 root.submit()
                 
-<Perfil2>: #Desarrollador de Software
-    name: "perfil2"
+<Perfil1b>: #Scrum Master / Agile Coach
+    name: "perfil1b"
+    scr: scr
+
+    GridLayout:
+        cols:1
+        canvas.before:
+            Color:
+                rgba:(0/255,51/255,102/255,1)
+            Rectangle:
+                pos:self.pos
+                size:self.size
+        
+        FloatLayout:
+            size: root.width, root.height/2
+            padding: 15
+            
+            Label:
+                text: "Scrum Master / Agile Coach"
+                #color: (0/255 ,0/255, 0/255,1)
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                text: "[u]Otras denominaciones[/u]: "
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.95}
+                font_size: (root.width**2 + root.height**2) / 17**4                       
+    
+            Label:
+                text: "[u]Misión[/u]: Liderar los equipos en la gestión ágil de proyectos. Lograr que los equipos de trabajo alcancen sus objetivos hasta"
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.92}
+                font_size: (root.width**2 + root.height**2) / 17**4             
+
+            Label:
+                text: "llegar a la fase de sprint final, eliminando cualquier dificultad que puedan encontrar en el camino. Transmite un enfoque proactivo"
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.89}
+                font_size: (root.width**2 + root.height**2) / 17**4   
+
+            Label:
+                text: "y de vanguardia para llevar a cabo proyectos y ejectuar procesos con el objetivo de que la empresa gane adaptabilidad."
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.86}
+                font_size: (root.width**2 + root.height**2) / 17**4                   
+
+            Label:
+                text: "Indique, para cada especialidad, la cantidad de búsquedas activas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.75}
+                font_size: (root.width**2 + root.height**2) / 14.5**4
+
+            Label:
+                text: "Puede dejar en blanco las especialidades sin búsquedas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.7}
+                font_size: (root.width**2 + root.height**2) / 17**4                
+                            
+            Label:
+                text: "Scrum Master / Agile Coach:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.15}
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'                
+    
+            TextInput:
+                id: scr
+                pos_hint: {"x":0.8, "top":0.75-0.155}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Ingresar valores y volver al menú anterior"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_press: 
+                self.background_color = (0/255,51/255,102/255,1)   
+            on_release:
+                root.manager.transition.direction = "right"            
+                root.submit()                 
+
+<Perfil2a>: #Desarrollador de Software Back End
+    name: "perfil2a"
     app_cs: app_cs
     desar_web: desar_web
     desar_juegos: desar_juegos
@@ -378,28 +526,28 @@
             padding: 15
             
             Label:
-                text: "Desarrollador de Software"
+                text: "Desarrollador de Software Back End"
                 #color: (0/255 ,0/255, 0/255,1)
                 size_hint: 0.8, 0.2
                 pos_hint: {"x":0.1, "top":1}
                 font_size: (root.width**2 + root.height**2) / 14**4
 
             Label:
-                text: "[u]Otras denominaciones[/u]: Programador / Analista-programador / Developer"
+                text: "[u]Otras denominaciones[/u]: Programador Back End / Analista-programador Back End / Developer Back End"
                 markup: True
                 size_hint: 0.8, 0.2
                 pos_hint: {"x":0.1, "top":0.95}
                 font_size: (root.width**2 + root.height**2) / 17**4       
 
             Label:
-                text: "[u]Misión[/u]: Participar del proceso de programación / implementación teniendo como entrada las especificaciones de software y"
+                text: "[u]Misión[/u]: Participar del proceso de programación / implementación teniendo como entrada las especificaciones de software y ajustándose"
                 markup: True
                 size_hint: 0.8, 0.2
                 pos_hint: {"x":0.1, "top":0.92}
                 font_size: (root.width**2 + root.height**2) / 17**4             
 
             Label:
-                text: "ajustándose a tiempos y estándares de calidad y trabajo de la organización y del proyecto"
+                text: " a tiempos y estándares de calidad y trabajo de la organización y del proyecto, ocupándose de la arquitectura interna  de la web, aplicación o software."
                 size_hint: 0.8, 0.2
                 pos_hint: {"x":0.1, "top":0.89}
                 font_size: (root.width**2 + root.height**2) / 17**4                                    
@@ -502,6 +650,298 @@
                 root.manager.transition.direction = "right" 
                 root.submit()
    
+<Perfil2b>: #Desarrollador de Software Front End
+    name: "perfil2b"
+    app_cs_b: app_cs_b
+    desar_web_b: desar_web_b
+    desar_juegos_b: desar_juegos_b
+    desar_app_mov_b: desar_app_mov_b
+    desar_sist_emb_b: desar_sist_emb_b
+
+    GridLayout:
+        cols:1
+        canvas.before:
+            Color:
+                rgba:(0/255,51/255,102/255,1)
+            Rectangle:
+                pos:self.pos
+                size:self.size
+        
+        FloatLayout:
+            size: root.width, root.height/2
+            padding: 15
+            
+            Label:
+                text: "Desarrollador de Software Front End"
+                #color: (0/255 ,0/255, 0/255,1)
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                text: "[u]Otras denominaciones[/u]: Programador Front End / Analista-programador Front End / Developer Front End"
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.95}
+                font_size: (root.width**2 + root.height**2) / 17**4       
+
+            Label:
+                text: "[u]Misión[/u]: Participar del proceso de programación / implementación teniendo como entrada las especificaciones de software y ajustándose"
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.92}
+                font_size: (root.width**2 + root.height**2) / 17**4             
+
+            Label:
+                text: "a tiempos y estándares de calidad y trabajo de la organización y del proyecto, ocupándose de la inerfaz gráfica para el usuario."
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.89}
+                font_size: (root.width**2 + root.height**2) / 17**4                                    
+                
+            Label:
+                text: "Indique, para cada especialidad, la cantidad de búsquedas activas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.75}
+                font_size: (root.width**2 + root.height**2) / 14.5**4
+
+            Label:
+                text: "Puede dejar en blanco las especialidades sin búsquedas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.7}
+                font_size: (root.width**2 + root.height**2) / 17**4                
+                            
+            Label:
+                text: "Desarrollador de aplicaciones cliente-servidor:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12}
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'                
+    
+            TextInput:
+                id: app_cs_b
+                pos_hint: {"x":0.8, "top":0.75-0.125}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+       
+            Label:
+                text: "Desarrollador Web:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12*2}                
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'
+                
+            TextInput:
+                id: desar_web_b
+                pos_hint: {"x":0.8, "top":0.75-0.125*2}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                text: "Desarrollador de juegos / Aplicaciones lúdicas:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12*3}
+                font_size: (root.width**2 + root.height**2) / 15.5**4 
+                text_size: self.size
+                halign: 'left'               
+    
+            TextInput:
+                id: desar_juegos_b
+                pos_hint: {"x":0.8, "top":0.75-0.125*3}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+    
+            Label:
+                text: "Desarrollador de Aplicaciones Móviles:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12*4}                
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'
+                
+            TextInput:
+                id: desar_app_mov_b
+                pos_hint: {"x":0.8, "top":0.75-0.125*4}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                text: "Desarrollador de Sistemas Embebidos:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12*5}                
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'
+                
+            TextInput:
+                id: desar_sist_emb_b
+                pos_hint: {"x":0.8, "top":0.75-0.125*5}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Ingresar valores y volver al menú anterior"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_press: 
+                self.background_color = (0/255,51/255,102/255,1) 
+            on_release:            
+                root.manager.transition.direction = "right" 
+                root.submit()
+
+<Perfil2c>: #Desarrollador de Software Full Stack
+    name: "perfil2c"
+    app_cs_c: app_cs_c
+    desar_web_c: desar_web_c
+    desar_juegos_c: desar_juegos_c
+    desar_app_mov_c: desar_app_mov_c
+    desar_sist_emb_c: desar_sist_emb_c
+
+    GridLayout:
+        cols:1
+        canvas.before:
+            Color:
+                rgba:(0/255,51/255,102/255,1)
+            Rectangle:
+                pos:self.pos
+                size:self.size
+        
+        FloatLayout:
+            size: root.width, root.height/2
+            padding: 15
+            
+            Label:
+                text: "Desarrollador de Software Full Stack"
+                #color: (0/255 ,0/255, 0/255,1)
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                text: "[u]Otras denominaciones[/u]: Programador Full Stack / Analista-programador Full Stack / Developer Full Stack"
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.95}
+                font_size: (root.width**2 + root.height**2) / 17**4       
+
+            Label:
+                text: "[u]Misión[/u]: Participar del proceso de programación / implementación teniendo como entrada las especificaciones de software y ajustándose a tiempos y"
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.92}
+                font_size: (root.width**2 + root.height**2) / 17**4             
+
+            Label:
+                text: "estándares de calidad y trabajo de la organización y del proyecto, capaz de ocuparse tanto de la arquitectura interna como de la inerfaz gráfica para el usuario."
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.89}
+                font_size: (root.width**2 + root.height**2) / 17**4                                    
+                
+            Label:
+                text: "Indique, para cada especialidad, la cantidad de búsquedas activas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.75}
+                font_size: (root.width**2 + root.height**2) / 14.5**4
+
+            Label:
+                text: "Puede dejar en blanco las especialidades sin búsquedas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.7}
+                font_size: (root.width**2 + root.height**2) / 17**4                
+                            
+            Label:
+                text: "Desarrollador de aplicaciones cliente-servidor:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12}
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'                
+    
+            TextInput:
+                id: app_cs_c
+                pos_hint: {"x":0.8, "top":0.75-0.125}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+       
+            Label:
+                text: "Desarrollador Web:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12*2}                
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'
+                
+            TextInput:
+                id: desar_web_c
+                pos_hint: {"x":0.8, "top":0.75-0.125*2}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                text: "Desarrollador de juegos / Aplicaciones lúdicas:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12*3}
+                font_size: (root.width**2 + root.height**2) / 15.5**4 
+                text_size: self.size
+                halign: 'left'               
+    
+            TextInput:
+                id: desar_juegos_c
+                pos_hint: {"x":0.8, "top":0.75-0.125*3}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+    
+            Label:
+                text: "Desarrollador de Aplicaciones Móviles:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12*4}                
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'
+                
+            TextInput:
+                id: desar_app_mov_c
+                pos_hint: {"x":0.8, "top":0.75-0.125*4}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                text: "Desarrollador de Sistemas Embebidos:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.12*5}                
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'
+                
+            TextInput:
+                id: desar_sist_emb_c
+                pos_hint: {"x":0.8, "top":0.75-0.125*5}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Ingresar valores y volver al menú anterior"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_press: 
+                self.background_color = (0/255,51/255,102/255,1) 
+            on_release:            
+                root.manager.transition.direction = "right" 
+                root.submit()
+
 <Perfil3>: #Arquitecto de Software
     name: "perfil3"    
     app_mov: app_mov
@@ -937,7 +1377,7 @@
                 root.manager.transition.direction = "right"            
                 root.submit()                     
 
-<Perfil7>: #Analista UX (Usabilidad)
+<Perfil7>: #Analista UI/UX (Usabilidad)
     name: "perfil7"    
     research: research
     analisis: analisis
@@ -958,21 +1398,21 @@
             padding: 15
             
             Label:
-                text: "Analista UX (Usabilidad)"
+                text: "Analista UI/UX (Usabilidad)"
                 #color: (0/255 ,0/255, 0/255,1)
                 size_hint: 0.8, 0.2
                 pos_hint: {"x":0.1, "top":1}
                 font_size: (root.width**2 + root.height**2) / 14**4
 
             Label:
-                text: "[u]Otras denominaciones[/u]: Analista de Usabilidad / Analista UX / Analista de Experiencia de Usuario / Consultor de Usabilidad "
+                text: "[u]Otras denominaciones[/u]: Analista de Usabilidad / Analista UI/UX / Analista de Experiencia de Usuario / Consultor de Usabilidad"
                 markup: True
                 size_hint: 0.8, 0.2
                 pos_hint: {"x":0.1, "top":0.95}
                 font_size: (root.width**2 + root.height**2) / 17**4       
 
             Label:
-                text: "/ Consultor UX / Diseñador UX / User Insight Analyst / Experience Designer / User Experience Analyst"
+                text: "/ Consultor UI/UX / Diseñador UI/UX / User Insight Analyst / Experience Designer / User Experience Analyst."
                 markup: True
                 size_hint: 0.8, 0.2
                 pos_hint: {"x":0.1, "top":0.92}
@@ -1187,6 +1627,75 @@
             on_release:
                 root.manager.transition.direction = "right"            
                 root.submit()
+
+<Perfil19>: #QA Automation
+    name: "perfil19"
+    qa: qa
+
+    GridLayout:
+        cols:1
+        canvas.before:
+            Color:
+                rgba:(0/255,51/255,102/255,1)
+            Rectangle:
+                pos:self.pos
+                size:self.size
+        
+        FloatLayout:
+            size: root.width, root.height/2
+            padding: 15
+            
+            Label:
+                text: "QA Automation"
+                #color: (0/255 ,0/255, 0/255,1)
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+    
+            Label:
+                text: "[u]Misión[/u]: Decide cuáles de las pruebas detalladas en el plan de pruebas tiene prioridad para automatizarse."
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.92}
+                font_size: (root.width**2 + root.height**2) / 17**4             
+
+            Label:
+                text: "Indique, para cada especialidad, la cantidad de búsquedas activas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.75}
+                font_size: (root.width**2 + root.height**2) / 14.5**4
+
+            Label:
+                text: "Puede dejar en blanco las especialidades sin búsquedas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.7}
+                font_size: (root.width**2 + root.height**2) / 17**4                
+                            
+            Label:
+                text: "QA Automation:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.15}
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'                
+    
+            TextInput:
+                id: qa
+                pos_hint: {"x":0.8, "top":0.75-0.155}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Ingresar valores y volver al menú anterior"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_press: 
+                self.background_color = (0/255,51/255,102/255,1)   
+            on_release:
+                root.manager.transition.direction = "right"            
+                root.submit() 
 
 <Perfil9>: #Analista de Calidad
     name: "perfil9"
@@ -2119,3 +2628,169 @@
             on_release:
                 root.manager.transition.direction = "right"            
                 root.submit() 
+
+<Perfil20>: #DevOps
+    name: "perfil20"
+    devops: devops
+
+    GridLayout:
+        cols:1
+        canvas.before:
+            Color:
+                rgba:(0/255,51/255,102/255,1)
+            Rectangle:
+                pos:self.pos
+                size:self.size
+        
+        FloatLayout:
+            size: root.width, root.height/2
+            padding: 15
+            
+            Label:
+                text: "DevOps"
+                #color: (0/255 ,0/255, 0/255,1)
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                text: "[u]Otras denominaciones[/u]: Site Reliability Engineer / Devops Consultant"
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.95}
+                font_size: (root.width**2 + root.height**2) / 17**4                       
+    
+            Label:
+                text: "[u]Misión[/u]: Transformar culturalmente el área de development. Hacer que todo"
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.92}
+                font_size: (root.width**2 + root.height**2) / 17**4             
+
+            Label:
+                text: "el ciclo de vida de la aplicación sea mejor y tenga menores errores cuando llegue a producción."
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.89}
+                font_size: (root.width**2 + root.height**2) / 17**4   
+
+            Label:
+                text: "Indique, para cada especialidad, la cantidad de búsquedas activas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.75}
+                font_size: (root.width**2 + root.height**2) / 14.5**4
+
+            Label:
+                text: "Puede dejar en blanco las especialidades sin búsquedas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.7}
+                font_size: (root.width**2 + root.height**2) / 17**4                
+                            
+            Label:
+                text: "DevOps:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.15}
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'                
+    
+            TextInput:
+                id: devops
+                pos_hint: {"x":0.8, "top":0.75-0.155}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Ingresar valores y volver al menú anterior"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_press: 
+                self.background_color = (0/255,51/255,102/255,1)   
+            on_release:
+                root.manager.transition.direction = "right"            
+                root.submit() 
+
+<Perfil21>: #Experto en Machine Learning
+    name: "perfil21"
+    malearn: malearn
+
+    GridLayout:
+        cols:1
+        canvas.before:
+            Color:
+                rgba:(0/255,51/255,102/255,1)
+            Rectangle:
+                pos:self.pos
+                size:self.size
+        
+        FloatLayout:
+            size: root.width, root.height/2
+            padding: 15
+            
+            Label:
+                text: "Experto en Machine Learning"
+                #color: (0/255 ,0/255, 0/255,1)
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                text: "[u]Otras denominaciones[/u]: - "
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.95}
+                font_size: (root.width**2 + root.height**2) / 17**4                       
+    
+            Label:
+                text: "[u]Misión[/u]: Diseño de software de ejecución automática para automatizar modelos predictivos,"
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.92}
+                font_size: (root.width**2 + root.height**2) / 17**4             
+
+            Label:
+                text: "incluyendo modelos de árboles de decisión, random forest, redes neuronales, entre otros."
+                markup: True
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":0.89}
+                font_size: (root.width**2 + root.height**2) / 17**4   
+
+            Label:
+                text: "Indique, para cada especialidad, la cantidad de búsquedas activas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.75}
+                font_size: (root.width**2 + root.height**2) / 14.5**4
+
+            Label:
+                text: "Puede dejar en blanco las especialidades sin búsquedas actuales"
+                size_hint: 0.4,0.1
+                pos_hint: {"x":0.3, "top":0.7}
+                font_size: (root.width**2 + root.height**2) / 17**4                
+                            
+            Label:
+                text: "Experto en Machine Learning:"
+                size_hint: 0.4,0.08
+                pos_hint: {"x":0.1, "top":0.75-0.15}
+                font_size: (root.width**2 + root.height**2) / 15.5**4
+                text_size: self.size
+                halign: 'left'                
+    
+            TextInput:
+                id: malearn
+                pos_hint: {"x":0.8, "top":0.75-0.155}
+                size_hint: 0.12, 0.09
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Ingresar valores y volver al menú anterior"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_press: 
+                self.background_color = (0/255,51/255,102/255,1)   
+            on_release:
+                root.manager.transition.direction = "right"            
+                root.submit()                 

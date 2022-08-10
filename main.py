@@ -16,6 +16,7 @@ from Bases import *
 import os # para borrar archivos
 import random
 import sys
+import glob
     
 #lista para chequear que se ingresen valores númericos en los inputs de la app
 x = range(9999)
@@ -23,19 +24,34 @@ y = []
 for n in x:
     y.append(str(n))
 
-urls = pd.read_excel('LinksNoBorrar.xlsx')
+path = os.getcwd()
+f_list  = glob.glob(os.path.join(path, "*.xlsx"))
+my_path = f_list[0]
+urls = pd.read_excel(my_path)
 
 class Introduccion(Screen):
     def perfil_csv(self):
     #Creamos .csv de perfiles
-        #perfil 1
+        #perfil 1a
         data1 = {'x1_11':([0]*len(urls)), 'x1_12':([0]*len(urls))}
         df_data1 = pd.DataFrame.from_dict(data1)
         df_data1.to_csv("perfil1.csv")
-        #perfil 2
+        #perfil 1b
+        data1b = {'x1b_11':([0]*len(urls))}
+        df_data1b = pd.DataFrame.from_dict(data1b)
+        df_data1b.to_csv("perfil1b.csv")        
+        #perfil 2a
         data2 = {'x2_11':([0]*len(urls)), 'x2_12':([0]*len(urls)), 'x2_13':([0]*len(urls)), 'x2_14':([0]*len(urls)), 'x2_15':([0]*len(urls))}
         df_data2 = pd.DataFrame.from_dict(data2)
         df_data2.to_csv("perfil2.csv")
+        #perfil 2b
+        data2b = {'x2b_11':([0]*len(urls)), 'x2b_12':([0]*len(urls)), 'x2b_13':([0]*len(urls)), 'x2b_14':([0]*len(urls)), 'x2b_15':([0]*len(urls))}
+        df_data2b = pd.DataFrame.from_dict(data2b)
+        df_data2b.to_csv("perfil2b.csv")
+        #perfil 2c
+        data2c = {'x2c_11':([0]*len(urls)), 'x2c_12':([0]*len(urls)), 'x2c_13':([0]*len(urls)), 'x2c_14':([0]*len(urls)), 'x2c_15':([0]*len(urls))}
+        df_data2c = pd.DataFrame.from_dict(data2c)
+        df_data2c.to_csv("perfil2c.csv")
         #perfil3
         data3 = {'x3_11':([0]*len(urls)), 'x3_12':([0]*len(urls))}
         df_data3 = pd.DataFrame.from_dict(data3)
@@ -100,6 +116,18 @@ class Introduccion(Screen):
         data18 = {'x18_11':([0]*len(urls))}
         df_data18 = pd.DataFrame.from_dict(data18)
         df_data18.to_csv("perfil18.csv")
+        #perfil19
+        data19 = {'x19_11':([0]*len(urls))}
+        df_data19 = pd.DataFrame.from_dict(data19)
+        df_data19.to_csv("perfil19.csv") 
+        #perfil20
+        data20 = {'x20_11':([0]*len(urls))}
+        df_data20 = pd.DataFrame.from_dict(data20)
+        df_data20.to_csv("perfil20.csv")  
+        #perfil21
+        data21 = {'x21_11':([0]*len(urls))}
+        df_data21 = pd.DataFrame.from_dict(data21)
+        df_data21.to_csv("perfil21.csv")               
 
 class MainWindow(Screen):
     def btn(self):
@@ -107,8 +135,11 @@ class MainWindow(Screen):
 
 class Popups(FloatLayout):
     def fin(self):
-        p1 = pd.read_csv('perfil1.csv') #respuestas a la primera pregunta
-        p2 = pd.read_csv('perfil2.csv') #respuestas a la segunda pregunta
+        p1 = pd.read_csv('perfil1.csv')
+        p1b = pd.read_csv('perfil1b.csv') #respuestas a la primera pregunta
+        p2a = pd.read_csv('perfil2.csv') #respuestas a la segunda pregunta
+        p2b = pd.read_csv('perfil2b.csv')
+        p2c = pd.read_csv('perfil2c.csv')
         p3 = pd.read_csv('perfil3.csv') #respuestas a la segunda pregunta
         p4 = pd.read_csv('perfil4.csv') #respuestas a la segunda pregunta
         p5 = pd.read_csv('perfil5.csv') #respuestas a la segunda pregunta
@@ -124,8 +155,16 @@ class Popups(FloatLayout):
         p15 = pd.read_csv('perfil15.csv') #respuestas a la segunda pregunta
         p16 = pd.read_csv('perfil16.csv') #respuestas a la segunda pregunta    
         p17 = pd.read_csv('perfil17.csv') #respuestas a la segunda pregunta
-        p18 = pd.read_csv('perfil18.csv') #respuestas a la segunda pregunta     
-        urls = pd.read_excel('LinksNoBorrar.xlsx') 
+        p18 = pd.read_csv('perfil18.csv') #respuestas a la segunda pregunta
+        p19 = pd.read_csv('perfil19.csv') #respuestas a la segunda pregunta
+        p20 = pd.read_csv('perfil20.csv') #respuestas a la segunda pregunta  
+        p21 = pd.read_csv('perfil21.csv')   
+
+        path = os.getcwd()
+        f_list  = glob.glob(os.path.join(path, "*.xlsx"))
+        my_path = f_list[0]
+        urls = pd.read_excel(my_path)
+
         urls = urls.links.sample(frac = 1).reset_index(drop=True) #orden aleatorio de links
         urls = urls.to_frame() 
         
@@ -136,8 +175,13 @@ class Popups(FloatLayout):
         for user_id in range(len(urls)):
             driver.get(urls.links[user_id])
             driver = answers(driver = driver, df = p1, rta1 = rta1, rta2 = rta2, user_id = user_id)
-            driver = answers2(driver = driver, df = p2, rta2a = rta2_a, rta2b = rta2_b,
+            driver = answers1b(driver = driver, df = p1b, rta1ba = rta1b_a, user_id = user_id)
+            driver = answers2(driver = driver, df = p2a, rta2a = rta2_a, rta2b = rta2_b,
                         rta2c = rta2_c, rta2d = rta2_d, rta2e = rta2_e, user_id = user_id)
+            driver = answers2b(driver = driver, df = p2b, rta2ba = rta2b_a, rta2bb = rta2b_b,
+                        rta2bc = rta2b_c, rta2bd = rta2b_d, rta2be = rta2b_e, user_id = user_id)
+            driver = answers2c(driver = driver, df = p2c, rta2ca = rta2c_a, rta2cb = rta2c_b,
+                        rta2cc = rta2c_c, rta2cd = rta2c_d, rta2ce = rta2c_e, user_id = user_id)                        
             driver = answers3(driver = driver, df = p3, rta3a = rta3_a, rta3b = rta3_b, user_id = user_id)
             driver = answers4(driver = driver, df = p4, rta4a = rta4_a, rta4b = rta4_b, rta4c = rta4_c, user_id = user_id)
             driver = answers5(driver = driver, df = p5, rta5a = rta5_a, rta5b = rta5_b, rta5c = rta5_c, user_id = user_id)
@@ -145,6 +189,7 @@ class Popups(FloatLayout):
             driver = answers7(driver = driver, df = p7, rta7a = rta7_a, rta7b = rta7_b,
                         rta7c = rta7_c, rta7d = rta7_d, user_id = user_id)
             driver = answers8(driver = driver, df = p8, rta8a = rta8_a, rta8b = rta8_b, rta8c = rta8_c, user_id = user_id)
+            driver = answers19(driver = driver, df = p19, rta19a = rta19_a, user_id = user_id)
             driver = answers9(driver = driver, df = p9, rta9a = rta9_a, rta9b = rta9_b, rta9c = rta9_c, user_id = user_id)
             driver = answers10(driver = driver, df = p10, rta10a = rta10_a, rta10b = rta10_b,
                         rta10c = rta10_c, rta10d = rta10_d, rta10e = rta10_e, rta10f = rta10_f, user_id = user_id)
@@ -156,23 +201,26 @@ class Popups(FloatLayout):
             driver = answers16(driver = driver, df = p16, rta16a = rta16_a, user_id = user_id)
             driver = answers17(driver = driver, df = p17, rta17a = rta17_a, user_id = user_id)
             driver = answers18(driver = driver, df = p18, rta18a = rta18_a, user_id = user_id)
+            driver = answers20(driver = driver, df = p20, rta20a = rta20_a, user_id = user_id)
+            driver = answers21(driver = driver, df = p21, rta21a = rta21_a, user_id = user_id)
             driver = submit(driver = driver, element_class = submit_class)            
 
         driver.close() # cerramos el web driver
-        perfiles = ["perfil1.csv", "perfil2.csv", "perfil3.csv", "perfil4.csv", "perfil5.csv", "perfil6.csv",
-                    "perfil7.csv", "perfil8.csv", "perfil9.csv", "perfil10.csv", "perfil11.csv", "perfil12.csv",
-                    "perfil13.csv", "perfil14.csv", "perfil15.csv", "perfil16.csv", "perfil17.csv", "perfil18.csv"]
+        perfiles = ["perfil1.csv", "perfil1b.csv", "perfil2.csv", "perfil2b.csv", "perfil2c.csv", "perfil3.csv", "perfil4.csv", "perfil5.csv",
+                    "perfil6.csv", "perfil7.csv", "perfil8.csv", "perfil9.csv", "perfil10.csv", "perfil11.csv", "perfil12.csv",
+                    "perfil13.csv", "perfil14.csv", "perfil15.csv", "perfil16.csv", "perfil17.csv", "perfil18.csv", "perfil19.csv",
+                    "perfil20.csv", "perfil21.csv"]
         for perfil in perfiles:
             os.remove(perfil)
 
         FormularioTECx.get_running_app().stop()
        
-class Perfil1(Screen): #Líder de Desarrollo / Proyect Manager (PM)
+class Perfil1(Screen): #Líder de Desarrollo / ProjectManager (PM)
     pm = ObjectProperty(None)
     sdm = ObjectProperty(None)
     
     def submit(self):
-        if ((self.pm.text in y or self.pm.text.count("") == 1) and (self.sdm.text in y or self.sdm.text.count("") == 1) ):
+        if ((self.pm.text in y or self.pm.text.count("") == 1) and (self.sdm.text in y or self.sdm.text.count("") == 1)):
             x1_11 = fragmentar(self.pm.text)
             x1_12 = fragmentar(self.sdm.text)
         
@@ -188,9 +236,29 @@ class Perfil1(Screen): #Líder de Desarrollo / Proyect Manager (PM)
             self.reset()
     def reset(self):
         self.pm.text = ""
-        self.sdm.text = ""
+        self.sdm.text = ""     
 
-class Perfil2(Screen): #Desarrollador de Software
+class Perfil1b(Screen): #Scrum Master
+    scr = ObjectProperty(None)
+
+    def submit(self):
+        if ((self.scr.text in y or self.scr.text.count("") == 1)):
+            x1b_11 = fragmentar(self.scr.text)
+        
+            sm.current = "main"        
+          
+            perfil1b_dict = {'x1b_11':x1b_11}
+            df_perfil1b= pd.DataFrame.from_dict(perfil1b_dict)
+            df_perfil1b.to_csv("perfil1b.csv")
+
+        else:
+            invalidForm()
+            sm.current = "perfil1b"
+            self.reset() 
+    def reset(self):
+        self.scr.text = ""
+
+class Perfil2a(Screen): #Desarrollador de Software Back End
     app_cs = ObjectProperty(None)
     desar_web = ObjectProperty(None)
     desar_juegos = ObjectProperty(None)
@@ -214,7 +282,7 @@ class Perfil2(Screen): #Desarrollador de Software
 
         else:
             invalidForm()
-            sm.current = "perfil2"
+            sm.current = "perfil2a"
             self.reset() 
     def reset(self):
         self.app_cs.text = ""
@@ -222,6 +290,72 @@ class Perfil2(Screen): #Desarrollador de Software
         self.desar_juegos.text = ""
         self.desar_app_mov.text = ""  
         self.desar_sist_emb.text = ""          
+
+class Perfil2b(Screen): #Desarrollador de Software Front End
+    app_cs_b = ObjectProperty(None)
+    desar_web_b = ObjectProperty(None)
+    desar_juegos_b = ObjectProperty(None)
+    desar_app_mov_b = ObjectProperty(None)
+    desar_sist_emb_b = ObjectProperty(None)
+
+    def submit(self):
+        if ((self.app_cs_b.text in y or self.app_cs_b.text.count("") == 1) and (self.desar_web_b.text in y or self.desar_web_b.text.count("") == 1)
+                and (self.desar_juegos_b.text in y or self.desar_juegos_b.text.count("") == 1) and (self.desar_app_mov_b.text in y or self.desar_app_mov_b.text.count("") == 1)
+                and (self.desar_sist_emb_b.text in y or self.desar_sist_emb_b.text.count("") == 1)):
+            x2b_11 = fragmentar(self.app_cs_b.text)
+            x2b_12 = fragmentar(self.desar_web_b.text)
+            x2b_13 = fragmentar(self.desar_juegos_b.text)
+            x2b_14 = fragmentar(self.desar_app_mov_b.text)
+            x2b_15 = fragmentar(self.desar_sist_emb_b.text)
+            sm.current = "main"
+            
+            perfil2b_dict = {'x2b_11':x2b_11, 'x2b_12':x2b_12, 'x2b_13':x2b_13, 'x2b_14':x2b_14, 'x2b_15':x2b_15}
+            df_perfil2b = pd.DataFrame.from_dict(perfil2b_dict)
+            df_perfil2b.to_csv("perfil2b.csv")
+
+        else:
+            invalidForm()
+            sm.current = "perfil2b"
+            self.reset() 
+    def reset(self):
+        self.app_cs_b.text = ""
+        self.desar_web_b.text = ""
+        self.desar_juegos_b.text = ""
+        self.desar_app_mov_b.text = ""  
+        self.desar_sist_emb_b.text = ""  
+
+class Perfil2c(Screen): #Desarrollador de Software Full Stack
+    app_cs_c = ObjectProperty(None)
+    desar_web_c = ObjectProperty(None)
+    desar_juegos_c = ObjectProperty(None)
+    desar_app_mov_c = ObjectProperty(None)
+    desar_sist_emb_c = ObjectProperty(None)
+
+    def submit(self):
+        if ((self.app_cs_c.text in y or self.app_cs_c.text.count("") == 1) and (self.desar_web_c.text in y or self.desar_web_c.text.count("") == 1)
+                and (self.desar_juegos_c.text in y or self.desar_juegos_c.text.count("") == 1) and (self.desar_app_mov_c.text in y or self.desar_app_mov_c.text.count("") == 1)
+                and (self.desar_sist_emb_c.text in y or self.desar_sist_emb_c.text.count("") == 1)):
+            x2c_11 = fragmentar(self.app_cs_c.text)
+            x2c_12 = fragmentar(self.desar_web_c.text)
+            x2c_13 = fragmentar(self.desar_juegos_c.text)
+            x2c_14 = fragmentar(self.desar_app_mov_c.text)
+            x2c_15 = fragmentar(self.desar_sist_emb_c.text)
+            sm.current = "main"
+            
+            perfil2c_dict = {'x2c_11':x2c_11, 'x2c_12':x2c_12, 'x2c_13':x2c_13, 'x2c_14':x2c_14, 'x2c_15':x2c_15}
+            df_perfil2c = pd.DataFrame.from_dict(perfil2c_dict)
+            df_perfil2c.to_csv("perfil2c.csv")
+
+        else:
+            invalidForm()
+            sm.current = "perfil2c"
+            self.reset() 
+    def reset(self):
+        self.app_cs_c.text = ""
+        self.desar_web_c.text = ""
+        self.desar_juegos_c.text = ""
+        self.desar_app_mov_c.text = ""  
+        self.desar_sist_emb_c.text = ""  
 
 class Perfil3(Screen): #Arquitecto de Software
     app_mov = ObjectProperty(None)
@@ -330,7 +464,7 @@ class Perfil6(Screen): #Diseñador Web
         self.webd.text = ""
         self.mkt.text = ""  
 
-class Perfil7(Screen): #Analista UX (Usabilidad)
+class Perfil7(Screen): #Analista UI/UX (Usabilidad)
     research = ObjectProperty(None)
     analisis = ObjectProperty(None)
     prot_inter = ObjectProperty(None)
@@ -388,6 +522,26 @@ class Perfil8(Screen): #Tester / Analista Tester
         self.orient_tec.text = ""
         self.orient_func.text = ""
         self.orient_seg.text = ""
+
+class Perfil19(Screen): #QA Automation
+    qa = ObjectProperty(None)
+
+    def submit(self):
+        if ((self.qa.text in y or self.qa.text.count("") == 1)):
+            x19_11 = fragmentar(self.qa.text)
+        
+            sm.current = "main"        
+          
+            perfil19_dict = {'x19_11':x19_11}
+            df_perfil19= pd.DataFrame.from_dict(perfil19_dict)
+            df_perfil19.to_csv("perfil19.csv")
+
+        else:
+            invalidForm()
+            sm.current = "perfil19"
+            self.reset() 
+    def reset(self):
+        self.qa.text = ""        
 
 class Perfil9(Screen): #Analista de Calidad
     iso = ObjectProperty(None)
@@ -514,6 +668,26 @@ class Perfil13(Screen): #Analista Big Data - Data Scientist
     def reset(self):
         self.dscience.text = ""
 
+class Perfil21(Screen): #Experto en Machine Learning
+    malearn = ObjectProperty(None)
+
+    def submit(self):
+        if ((self.malearn.text in y or self.malearn.text.count("") == 1)):
+            x21_11 = fragmentar(self.malearn.text)
+        
+            sm.current = "main"        
+          
+            perfil21_dict = {'x21_11':x21_11}
+            df_perfil21= pd.DataFrame.from_dict(perfil21_dict)
+            df_perfil21.to_csv("perfil21.csv")
+
+        else:
+            invalidForm()
+            sm.current = "perfil21"
+            self.reset() 
+    def reset(self):
+        self.malearn.text = ""
+
 class Perfil14(Screen): #Analista Middleware
     midd = ObjectProperty(None)
     
@@ -614,6 +788,26 @@ class Perfil18(Screen): #Implementador Software de Gestión
     def reset(self):
         self.soft_gest.text = ""
 
+class Perfil20(Screen): #DevOps
+    devops = ObjectProperty(None)
+
+    def submit(self):
+        if ((self.devops.text in y or self.devops.text.count("") == 1)):
+            x20_11 = fragmentar(self.devops.text)
+        
+            sm.current = "main"        
+          
+            perfil20_dict = {'x20_11':x20_11}
+            df_perfil20= pd.DataFrame.from_dict(perfil20_dict)
+            df_perfil20.to_csv("perfil20.csv")
+
+        else:
+            invalidForm()
+            sm.current = "perfil20"
+            self.reset() 
+    def reset(self):
+        self.devops.text = ""
+
 class WindowManager(ScreenManager):
     pass
 
@@ -685,13 +879,15 @@ def resource_path(relative_path):
 Logo = resource_path("TECx.png")
 
 sm = WindowManager()
-screens = [Introduccion(name="intro") , MainWindow(name="main"), Perfil1(name="perfil1"), 
-            Perfil2(name="perfil2"), Perfil3(name="perfil3"), Perfil4(name="perfil4"), 
+screens = [Introduccion(name="intro") , MainWindow(name="main"), Perfil1(name="perfil1"), Perfil1b(name="perfil1b"),
+            Perfil2a(name="perfil2a"), Perfil2b(name="perfil2b"), Perfil2c(name="perfil2c"),
+            Perfil3(name="perfil3"), Perfil4(name="perfil4"), 
             Perfil5(name="perfil5"), Perfil6(name="perfil6"), Perfil7(name="perfil7"), 
             Perfil8(name="perfil8"), Perfil9(name="perfil9"), Perfil10(name="perfil10"), 
             Perfil11(name="perfil11"), Perfil12(name="perfil12"), Perfil13(name="perfil13"), 
             Perfil14(name="perfil14"), Perfil15(name="perfil15"), Perfil16(name="perfil16"), 
-            Perfil17(name="perfil17"), Perfil18(name="perfil18")]
+            Perfil17(name="perfil17"), Perfil18(name="perfil18"), Perfil19(name="perfil19"),
+            Perfil20(name="perfil20"), Perfil21(name="perfil21")]
 for screen in screens:
     sm.add_widget(screen)
 
